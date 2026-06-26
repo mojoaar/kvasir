@@ -16,12 +16,12 @@ build: build-frontend
 	cd backend && go build -ldflags="-s -w" -o ../kvasir ./cmd/kvasir
 
 build-frontend:
-	cd frontend && pnpm build && mkdir -p ../backend/internal/embed/dist && cp -r out/* ../backend/internal/embed/dist/
+	cd frontend && pnpm build && rm -rf ../backend/internal/embed/dist && mkdir -p ../backend/internal/embed/dist && cp -r out/* ../backend/internal/embed/dist/
 
 build-backend:
 	cd backend && go build -ldflags="-s -w" -o ../kvasir ./cmd/kvasir
 
-build-all:
+build-all: build-frontend
 	cd backend && GOOS=darwin  GOARCH=amd64 go build -ldflags="-s -w" -o ../kvasir-darwin-amd64  ./cmd/kvasir
 	cd backend && GOOS=darwin  GOARCH=arm64 go build -ldflags="-s -w" -o ../kvasir-darwin-arm64  ./cmd/kvasir
 	cd backend && GOOS=linux   GOARCH=amd64 go build -ldflags="-s -w" -o ../kvasir-linux-amd64   ./cmd/kvasir

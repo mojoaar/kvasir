@@ -126,11 +126,11 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: CLI works against running backend
 
 ### 0.13 — Single Binary Build [1-2 days]
-- [ ] `make build` pipeline: frontend build → copy to `backend/internal/embed/dist/` → `go build`
-- [ ] Go `//go:embed` for serving frontend static files
-- [ ] `make build-all` cross-compile for 5 targets (darwin/amd64, darwin/arm64, windows/amd64, linux/amd64, linux/arm64)
-- [ ] Binary size check (< 100MB target)
-- [ ] Verify: single binary serves frontend + API on `:8080`
+- [x] `make build` pipeline: frontend build → copy to `backend/internal/embed/dist/` → `go build`
+- [x] Go `//go:embed` for serving frontend static files
+- [x] `make build-all` cross-compile for 5 targets (darwin/amd64, darwin/arm64, windows/amd64, linux/amd64, linux/arm64)
+- [x] Binary size check (< 100MB target)
+- [x] Verify: single binary serves frontend + API on `:8080`
 
 ### 0.14 — Welcome Note + Tutorial [1 day]
 - [ ] First-run: create welcome note with tutorial content
@@ -280,3 +280,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.10  | 2026-06-26 | Phase 0.10: Command palette (cmdk), Cmd+K shortcut, navigation/search/theme commands |
 | 0.1.11  | 2026-06-26 | Phase 0.11: Swaggo annotations, Swagger UI, OpenAPI spec, all 17 endpoints documented |
 | 0.1.12  | 2026-06-26 | Phase 0.12: CLI — list, search, export, create commands with --server flag |
+| 0.1.13  | 2026-06-26 | Phase 0.13: Single binary build, //go:embed frontend, 35MB ARM64 binary |

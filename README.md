@@ -89,6 +89,7 @@ Toggle dark/light per theme via the header switcher or `Cmd+Shift+T`.
 | 0.1.10  | 2026-06-26 | Phase 0.10: Command palette (cmdk), Cmd+K shortcut |
 | 0.1.11  | 2026-06-26 | Phase 0.11: Swaggo annotations, Swagger UI, OpenAPI spec |
 | 0.1.12  | 2026-06-26 | Phase 0.12: CLI — list, search, export, create commands |
+| 0.1.13  | 2026-06-26 | Phase 0.13: Single binary build, //go:embed frontend, 35MB binary |
 
 ## License
 

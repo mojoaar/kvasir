@@ -8,11 +8,13 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	"kvasir/internal/api"
+	embed "kvasir/internal/embed"
 	"kvasir/internal/storage"
 )
 
@@ -43,6 +45,8 @@ func main() {
 
 	r := gin.Default()
 	api.RegisterRoutes(r, store)
+
+	r.NoRoute(gin.WrapH(http.FileServer(embed.DistFS)))
 
 	log.Printf("Kvasir server starting on :%s", port)
 	if err := r.Run(":" + port); err != nil {
