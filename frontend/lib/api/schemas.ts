@@ -45,3 +45,23 @@ export const notesQuerySchema = z.object({
 })
 
 export type NotesQuery = z.infer<typeof notesQuerySchema>
+
+export const tagSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  color: z.string(),
+  createdAt: z.string(),
+})
+
+export type Tag = z.infer<typeof tagSchema>
+
+export const createTagSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  color: z.string().min(1, "Color is required"),
+})
+
+export type CreateTag = z.infer<typeof createTagSchema>
+
+export const addTagRequestSchema = z.object({
+  tagId: z.number(),
+})

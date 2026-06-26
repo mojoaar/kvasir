@@ -96,12 +96,13 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: search returns results < 100ms with 10k notes
 
 ### 0.9 — Tags API + UI [1-2 days]
-- [ ] `GET/POST /api/v1/tags` — list/create tags
-- [ ] `GET/PUT/DELETE /api/v1/tags/:id` — single tag operations
-- [ ] `POST/DELETE /api/v1/notes/:id/tags` — tag a note
-- [ ] Tag chips in sidebar + note editor
-- [ ] Tag color palette (cyclic 8-color rotation)
-- [ ] Verify: add/remove tags from notes, filter by tag
+- [x] `GET/POST /api/v1/tags` — list/create tags
+- [x] `GET/PUT/DELETE /api/v1/tags/:id` — single tag operations
+- [x] `POST/DELETE /api/v1/notes/:id/tags` — tag a note
+- [x] `GET /api/v1/notes/:id/tags` — get note tags
+- [x] Tag chips in sidebar + note editor
+- [x] Tag color palette (cyclic 8-color rotation)
+- [x] Verify: add/remove tags from notes, filter by tag
 
 ### 0.10 — Command Palette [2-3 days]
 - [ ] Cmd+K / Ctrl+K global shortcut
@@ -272,6 +273,10 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.3   | 2026-06-26 | Phase 0.3: shadcn/ui, TanStack React Query, Zustand stores, Providers, Sidebar component |
 | 0.1.4   | 2026-06-26 | Phase 0.4: 5-theme system (CSS variables), dark/light toggle, theme selector, Settings page |
 | 0.1.5   | 2026-06-26 | Phase 0.5: TipTap editor, toolbar, split view, Katex math, Mermaid diagrams, auto-save |
+| 0.1.6   | 2026-06-26 | Phase 0.6: Sidebar file tree, drag-and-drop, inline rename, folder CRUD |
+| 0.1.7   | 2026-06-26 | Phase 0.7: Notes REST API (CRUD), Zod schemas, handler+storage tests (83 total) |
+| 0.1.8   | 2026-06-26 | Phase 0.8: Full-text search endpoint, tag search, sidebar input, results page |
+| 0.1.9   | 2026-06-26 | Phase 0.9: Tags API + UI, tag chips, color palette, note tagging |
 | 0.1.6   | 2026-06-26 | Phase 0.6: File tree sidebar, nested folders, drag-and-drop, note counts, inline CRUD |
 | 0.1.7   | 2026-06-26 | Phase 0.7: Notes REST API (CRUD), Zod schemas, 83 tests passing, curl verified |
 | 0.1.8   | 2026-06-26 | Phase 0.8: FTS5 search endpoint, tag search, sidebar search input, results with highlights |
