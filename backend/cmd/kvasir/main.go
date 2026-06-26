@@ -3,9 +3,11 @@ package main
 import (
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	"kvasir/internal/api"
+	"kvasir/internal/storage"
 )
 
 func main() {
@@ -14,8 +16,27 @@ func main() {
 		port = "8080"
 	}
 
+	dbPath := os.Getenv("KVASIR_DB_PATH")
+	if dbPath == "" {
+		home, err := os.UserHomeDir()
+		if err != nil {
+			log.Fatalf("failed to get home directory: %v", err)
+		}
+		dbPath = filepath.Join(home, ".kvasir", "kvasir.db")
+	}
+
+	if err := os.MkdirAll(filepath.Dir(dbPath), 0755); err != nil {
+		log.Fatalf("failed to create data directory: %v", err)
+	}
+
+	store, err := storage.Open(dbPath)
+	if err != nil {
+		log.Fatalf("failed to open database: %v", err)
+	}
+	defer store.Close()
+
 	r := gin.Default()
-	api.RegisterRoutes(r)
+	api.RegisterRoutes(r, store)
 
 	log.Printf("Kvasir server starting on :%s", port)
 	if err := r.Run(":" + port); err != nil {

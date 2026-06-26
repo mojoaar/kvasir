@@ -31,27 +31,27 @@ Objective: Offline-first markdown knowledge base with 5 themes, full-text search
 REST API, CLI, and single-binary distribution.
 
 ### 0.1 — Project Scaffold [1-2 days]
-- [ ] Root `Makefile` with targets: dev, build, build-frontend, build-backend, build-all, lint, test, check, clean
-- [ ] `frontend/` scaffold: `pnpm create next-app` with App Router, TypeScript, Tailwind v4
-- [ ] `backend/` scaffold: `go mod init`, Gin skeleton, `cmd/kvasir/main.go`
-- [ ] `cli/` scaffold: Cobra root command
-- [ ] `.gitignore`, `.env.example`, `.golangci.yml`, `eslint.config.mjs`
-- [ ] Verify: `make dev` starts both frontend (:3000) and backend (:8080)
+- [x] Root `Makefile` with targets: dev, build, build-frontend, build-backend, build-all, lint, test, check, clean
+- [x] `frontend/` scaffold: `pnpm create next-app` with App Router, TypeScript, Tailwind v4
+- [x] `backend/` scaffold: `go mod init`, Gin skeleton, `cmd/kvasir/main.go`
+- [x] `cli/` scaffold: Cobra root command
+- [x] `.gitignore`, `.env.example`, `.golangci.yml`, `eslint.config.mjs`
+- [x] Verify: `make dev` starts both frontend (:3000) and backend (:8080)
 
 ### 0.2 — Backend Core [2-3 days]
-- [ ] SQLite schema: `notes`, `notes_fts` (FTS5), `tags`, `note_tags`, `vaults`, `attachments`, `versions`, `themes`, `plugins`, `plugin_permissions`
-- [ ] Storage layer: `sqlite.go` (open, migrate, WAL mode), `fts.go` (search), `models.go`
-- [ ] Health endpoint: `GET /api/v1/health`
-- [ ] Gin router with middleware chain (logging, CORS, recovery)
-- [ ] Verify: `go test ./...` passes
+- [x] SQLite schema: `notes`, `notes_fts` (FTS5), `tags`, `note_tags`, `vaults`, `attachments`, `versions`, `themes`, `plugins`, `plugin_permissions`
+- [x] Storage layer: `sqlite.go` (open, migrate, WAL mode), `fts.go` (search), `models.go`
+- [x] Health endpoint: `GET /api/v1/health`
+- [x] Gin router with middleware chain (logging, CORS, recovery)
+- [x] Verify: `go test ./...` passes (87.5% storage coverage, 100% handler coverage)
 
 ### 0.3 — Frontend Scaffold [2-3 days]
-- [ ] shadcn/ui init + component library setup
-- [ ] Root layout: `app/layout.tsx` with font loading, theme script, providers
-- [ ] Dashboard layout: sidebar shell, main content area
-- [ ] API client: `lib/api/client.ts` with TanStack React Query
-- [ ] Zustand stores: notes, theme, UI state
-- [ ] Verify: frontend renders, proxies API calls to backend
+- [x] shadcn/ui init + component library setup
+- [x] Root layout: `app/layout.tsx` with font loading, theme script, providers
+- [x] Dashboard layout: sidebar shell, main content area
+- [x] API client: `lib/api/client.ts` with TanStack React Query
+- [x] Zustand stores: notes, theme, UI state
+- [x] Verify: frontend renders, proxies API calls to backend
 
 ### 0.4 — Theme System [2-3 days]
 - [ ] CSS custom properties for all 5 themes (dark + light variants each) in Tailwind config
@@ -268,3 +268,5 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | ------- | ---------- | ---------------------------------------------------------------- |
 | 0.1.0   | 2026-06-26 | Initial project scaffold: agents.md, plan.md, README.md, LICENSE |
 | 0.1.1   | 2026-06-26 | Phase 0.1: Makefile, backend (Gin), frontend (Next.js 16), CLI (Cobra), configs |
+| 0.1.2   | 2026-06-26 | Phase 0.2: SQLite schema, storage layer (87.5% coverage), FTS5 search, health endpoint, SQLTime type |
+| 0.1.3   | 2026-06-26 | Phase 0.3: shadcn/ui, TanStack React Query, Zustand stores, Providers, Sidebar component |

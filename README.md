@@ -78,6 +78,8 @@ Toggle dark/light per theme via the header switcher or `Cmd+Shift+T`.
 | ------- | ---------- | ---------------------------------------------------------------- |
 | 0.1.0   | 2026-06-26 | Initial project scaffold: agents.md, plan.md, README.md, LICENSE |
 | 0.1.1   | 2026-06-26 | Phase 0.1: Makefile, backend (Gin), frontend (Next.js 16), CLI (Cobra), configs |
+| 0.1.2   | 2026-06-26 | Phase 0.2: SQLite schema, storage layer (87.5% coverage), FTS5 search, health endpoint, SQLTime type |
+| 0.1.3   | 2026-06-26 | Phase 0.3: shadcn/ui, TanStack React Query, Zustand stores, Providers, Sidebar component |
 
 ## License
 
