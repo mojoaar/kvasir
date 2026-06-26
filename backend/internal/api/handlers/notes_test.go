@@ -301,3 +301,86 @@ func TestListNotesHandlerWithParentFilter(t *testing.T) {
 		t.Errorf("expected status 200, got %d", w.Code)
 	}
 }
+
+
+func TestListNotesHandlerPagination(t *testing.T) {
+	_, r := setupNotesHandler(t)
+
+	for i := 1; i <= 5; i++ {
+		body := map[string]interface{}{"title": fmt.Sprintf("Note %d", i)}
+		b, _ := json.Marshal(body)
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("POST", "/api/v1/notes", bytes.NewReader(b))
+		req.Header.Set("Content-Type", "application/json")
+		r.ServeHTTP(w, req)
+	}
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/api/v1/notes?offset=0&limit=3", nil)
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", w.Code)
+	}
+
+	var notes []storage.Note
+	json.NewDecoder(w.Body).Decode(&notes)
+	if len(notes) != 3 {
+		t.Errorf("expected 3 notes with limit=3, got %d", len(notes))
+	}
+}
+
+func TestListNotesHandlerOffset(t *testing.T) {
+	_, r := setupNotesHandler(t)
+
+	for i := 1; i <= 5; i++ {
+		body := map[string]interface{}{"title": fmt.Sprintf("Note %d", i)}
+		b, _ := json.Marshal(body)
+		w := httptest.NewRecorder()
+		req, _ := http.NewRequest("POST", "/api/v1/notes", bytes.NewReader(b))
+		req.Header.Set("Content-Type", "application/json")
+		r.ServeHTTP(w, req)
+	}
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/api/v1/notes?offset=2&limit=10", nil)
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", w.Code)
+	}
+
+	var notes []storage.Note
+	json.NewDecoder(w.Body).Decode(&notes)
+	if len(notes) != 3 {
+		t.Errorf("expected 3 notes after offset=2 from 5 total, got %d", len(notes))
+	}
+}
+
+func TestUpdateNoteHandlerInvalidID(t *testing.T) {
+	_, r := setupNotesHandler(t)
+
+	body := map[string]string{"title": "test"}
+	b, _ := json.Marshal(body)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("PUT", "/api/v1/notes/invalid", bytes.NewReader(b))
+	req.Header.Set("Content-Type", "application/json")
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusBadRequest {
+		t.Errorf("expected 400, got %d", w.Code)
+	}
+}
+
+func TestDeleteNoteHandlerInvalidID(t *testing.T) {
+	_, r := setupNotesHandler(t)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("DELETE", "/api/v1/notes/invalid", nil)
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusBadRequest {
+		t.Errorf("expected 400, got %d", w.Code)
+	}
+}

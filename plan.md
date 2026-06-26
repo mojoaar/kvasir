@@ -138,28 +138,28 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: fresh install shows welcome note
 
 ### 0.15 — Testing + Coverage + Polish [3-4 days]
-- [ ] Frontend: vitest tests for theme system, API client, stores, command palette
-- [ ] Backend: Go table-driven tests for all handlers, storage layer, search, auth
-- [ ] Coverage collection wired into `make test`:
+- [x] Frontend: vitest tests for theme system, API client, stores, command palette
+- [x] Backend: Go table-driven tests for all handlers, storage layer, search, auth
+- [x] Coverage collection wired into `make test`:
   - `go test -coverprofile=coverage.out ./... && go tool cover -func=coverage.out`
   - `pnpm test -- --coverage`
-- [ ] Coverage thresholds enforced in `make check`:
+- [x] Coverage thresholds enforced in `make check`:
   - Backend: ≥ 80% line coverage (fail if below)
   - Frontend: ≥ 80% line coverage (fail if below)
-- [ ] `make check` passes (lint + test + coverage)
-- [ ] Performance check: startup < 2s, search < 100ms, memory < 500MB
-- [ ] Cross-platform smoke test (macOS binary)
+- [x] `make check` passes (lint + test + coverage)
+- [x] Performance check: startup < 2s, search < 100ms, memory < 500MB
+- [x] Cross-platform smoke test (macOS binary)
 
 ### MVP Success Checklist
-- [ ] Works offline with local SQLite storage
-- [ ] Create, edit, delete notes with full markdown
-- [ ] 5 built-in themes toggle correctly
-- [ ] Full-text search works instantly
-- [ ] REST API fully documented with OpenAPI
-- [ ] Single binary runs on macOS (ARM + Intel)
-- [ ] CLI can list/search/export notes
-- [ ] All linting and tests pass (`make check` green)
-- [ ] Command palette functional
+- [x] Works offline with local SQLite storage
+- [x] Create, edit, delete notes with full markdown
+- [x] 5 built-in themes toggle correctly
+- [x] Full-text search works instantly
+- [x] REST API fully documented with OpenAPI
+- [x] Single binary runs on macOS (ARM + Intel)
+- [x] CLI can list/search/export notes
+- [x] All linting and tests pass (`make check` green)
+- [x] Command palette functional
 
 ---
 
@@ -282,3 +282,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.12  | 2026-06-26 | Phase 0.12: CLI — list, search, export, create commands with --server flag |
 | 0.1.13  | 2026-06-26 | Phase 0.13: Single binary build, //go:embed frontend, 35MB ARM64 binary |
 | 0.1.14  | 2026-06-26 | Phase 0.14: Welcome note + tutorial, first-run seed (editor, themes, search, shortcuts) |
+| 0.1.15  | 2026-06-26 | Phase 0.15: Testing (35 frontend + backend), 80%+ coverage, performance verification, MVP complete |

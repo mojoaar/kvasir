@@ -295,3 +295,72 @@ func TestGetNoteTagsHandlerEmpty(t *testing.T) {
 		t.Errorf("expected 0 tags, got %d", len(tags))
 	}
 }
+
+func TestGetNoteTagsHandlerInvalidID(t *testing.T) {
+	r, _ := setupTagsRouter(t)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/api/v1/notes/invalid/tags", nil)
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusBadRequest {
+		t.Errorf("expected 400, got %d", w.Code)
+	}
+}
+
+func TestDeleteTagHandlerNotFound(t *testing.T) {
+	r, _ := setupTagsRouter(t)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("DELETE", "/api/v1/tags/999", nil)
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusInternalServerError {
+		t.Errorf("expected 500, got %d", w.Code)
+	}
+}
+
+func TestRemoveTagFromNoteHandlerInvalidID(t *testing.T) {
+	r, _ := setupTagsRouter(t)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("DELETE", "/api/v1/notes/invalid/tags", bytes.NewBuffer([]byte(`{"tagId":1}`)))
+	req.Header.Set("Content-Type", "application/json")
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusBadRequest {
+		t.Errorf("expected 400, got %d", w.Code)
+	}
+}
+
+func TestAddTagToNoteHandlerInvalidNoteID(t *testing.T) {
+	r, _ := setupTagsRouter(t)
+
+	body := map[string]int64{"tagId": 1}
+	jsonBody, _ := json.Marshal(body)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("POST", "/api/v1/notes/invalid/tags", bytes.NewBuffer(jsonBody))
+	req.Header.Set("Content-Type", "application/json")
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusBadRequest {
+		t.Errorf("expected 400, got %d", w.Code)
+	}
+}
+
+func TestUpdateTagHandlerInvalidID(t *testing.T) {
+	r, _ := setupTagsRouter(t)
+
+	body := map[string]string{"name": "test", "color": "#fff"}
+	jsonBody, _ := json.Marshal(body)
+
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("PUT", "/api/v1/tags/invalid", bytes.NewBuffer(jsonBody))
+	req.Header.Set("Content-Type", "application/json")
+	r.ServeHTTP(w, req)
+
+	if w.Code != http.StatusBadRequest {
+		t.Errorf("expected 400, got %d", w.Code)
+	}
+}

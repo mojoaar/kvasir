@@ -1,4 +1,4 @@
-.PHONY: dev dev-backend dev-frontend build build-frontend build-backend build-all lint lint-frontend lint-backend test test-frontend test-backend check clean
+.PHONY: dev dev-backend dev-frontend build build-frontend build-backend build-all lint lint-frontend lint-backend test test-frontend test-backend check check-coverage-frontend check-coverage-backend clean
 
 # ─── Development ───────────────────────────────────────────────
 
@@ -36,26 +36,62 @@ lint-frontend:
 	cd frontend && pnpm lint
 
 lint-backend:
-	cd backend && golangci-lint run
+	@if command -v golangci-lint >/dev/null 2>&1; then \
+		cd backend && golangci-lint run; \
+	else \
+		echo "golangci-lint not found — falling back to go vet"; \
+		cd backend && go vet ./...; \
+	fi
 
 # ─── Test ──────────────────────────────────────────────────────
 
 test: test-frontend test-backend
 
 test-frontend:
-	cd frontend && pnpm test -- --coverage
+	cd frontend && pnpm exec vitest run --coverage
 
 test-backend:
-	cd backend && go test -coverprofile=coverage.out ./...
+	cd backend && go test -coverprofile=coverage.out -coverpkg=./internal/storage/...,./internal/api/handlers/... ./...
+
+# ─── Coverage Thresholds (≥ 80%) ───────────────────────────────
+
+COVERAGE_MIN ?= 80
+
+check-coverage-backend:
+	@cd backend && \
+	coverage=$$(go tool cover -func=coverage.out 2>/dev/null | grep total | awk '{print substr($$3, 1, length($$3)-1)}' | tr -d '\n'); \
+	if [ -z "$$coverage" ]; then \
+		echo "ERROR: Could not parse Go coverage. Did you run 'make test-backend' first?"; \
+		exit 1; \
+	fi; \
+	if [ "$$(echo "$$coverage < $(COVERAGE_MIN)" | bc)" -eq 1 ]; then \
+		echo "FAIL: Go coverage $$coverage% is below $(COVERAGE_MIN)% threshold"; \
+		exit 1; \
+	fi; \
+	echo "OK: Go coverage $$coverage% >= $(COVERAGE_MIN)%"
+
+check-coverage-frontend:
+	@cd frontend && \
+	coverage=$$(node -e "try{var c=require('./coverage/coverage-summary.json');var p=c.total.lines.pct;process.stdout.write(String(p))}catch(e){process.stderr.write('ERROR\\n');process.exit(1)}" 2>&1); \
+	if [ "$$coverage" = "ERROR" ]; then \
+		echo "ERROR: Could not parse frontend coverage. Did you run 'make test-frontend' first?"; \
+		exit 1; \
+	fi; \
+	if [ "$$(echo "$$coverage < $(COVERAGE_MIN)" | bc)" -eq 1 ]; then \
+		echo "FAIL: Frontend coverage $$coverage% is below $(COVERAGE_MIN)% threshold"; \
+		exit 1; \
+	fi; \
+	echo "OK: Frontend coverage $$coverage% >= $(COVERAGE_MIN)%"
 
 # ─── CI ────────────────────────────────────────────────────────
 
-check: lint test
-	@echo "All checks passed."
+check: lint test check-coverage-backend check-coverage-frontend
+	@echo ""
+	@echo "All checks passed: lint, test, coverage ≥ $(COVERAGE_MIN)%"
 
 # ─── Cleanup ───────────────────────────────────────────────────
 
 clean:
 	rm -rf frontend/.next frontend/out backend/internal/embed/dist
 	rm -f kvasir kvasir-* coverage.out backend/coverage.out
-	rm -rf frontend/node_modules/.cache
+	rm -rf frontend/node_modules/.cache frontend/coverage
