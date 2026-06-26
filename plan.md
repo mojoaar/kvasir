@@ -105,11 +105,11 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: add/remove tags from notes, filter by tag
 
 ### 0.10 — Command Palette [2-3 days]
-- [ ] Cmd+K / Ctrl+K global shortcut
-- [ ] Command palette overlay (cmdk)
-- [ ] Commands: search notes, create note, switch theme, settings, keyboard shortcuts ref
-- [ ] Keyboard-first navigation
-- [ ] Verify: Cmd+K opens palette, type to search, Enter to execute
+- [x] Cmd+K / Ctrl+K global shortcut
+- [x] Command palette overlay (cmdk)
+- [x] Commands: search notes, create note, switch theme, settings, keyboard shortcuts ref
+- [x] Keyboard-first navigation
+- [x] Verify: Cmd+K opens palette, type to search, Enter to execute
 
 ### 0.11 — REST API Documentation [1-2 days]
 - [ ] Swaggo annotations on all Go handlers
@@ -277,6 +277,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.7   | 2026-06-26 | Phase 0.7: Notes REST API (CRUD), Zod schemas, handler+storage tests (83 total) |
 | 0.1.8   | 2026-06-26 | Phase 0.8: Full-text search endpoint, tag search, sidebar input, results page |
 | 0.1.9   | 2026-06-26 | Phase 0.9: Tags API + UI, tag chips, color palette, note tagging |
-| 0.1.6   | 2026-06-26 | Phase 0.6: File tree sidebar, nested folders, drag-and-drop, note counts, inline CRUD |
-| 0.1.7   | 2026-06-26 | Phase 0.7: Notes REST API (CRUD), Zod schemas, 83 tests passing, curl verified |
-| 0.1.8   | 2026-06-26 | Phase 0.8: FTS5 search endpoint, tag search, sidebar search input, results with highlights |
+| 0.1.10  | 2026-06-26 | Phase 0.10: Command palette (cmdk), Cmd+K shortcut, navigation/search/theme commands |
