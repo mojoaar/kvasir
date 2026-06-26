@@ -80,13 +80,13 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: CRUD notes from sidebar, drag to reorganize
 
 ### 0.7 — Notes API [2-3 days]
-- [ ] `GET /api/v1/notes` — list notes (pagination, vault filter)
-- [ ] `POST /api/v1/notes` — create note
-- [ ] `GET /api/v1/notes/:id` — get single note
-- [ ] `PUT /api/v1/notes/:id` — update note
-- [ ] `DELETE /api/v1/notes/:id` — soft delete note
-- [ ] Zod validation schemas for all request/response bodies
-- [ ] Verify: CRUD works via curl, OpenAPI docs reflect endpoints
+- [x] `GET /api/v1/notes` — list notes (pagination, vault filter)
+- [x] `POST /api/v1/notes` — create note
+- [x] `GET /api/v1/notes/:id` — get single note
+- [x] `PUT /api/v1/notes/:id` — update note
+- [x] `DELETE /api/v1/notes/:id` — soft delete note
+- [x] Zod validation schemas for all request/response bodies
+- [x] Verify: CRUD works via curl, OpenAPI docs reflect endpoints
 
 ### 0.8 — Full-Text Search [1-2 days]
 - [ ] `GET /api/v1/search?q=query` — FTS5 search endpoint
@@ -273,3 +273,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.4   | 2026-06-26 | Phase 0.4: 5-theme system (CSS variables), dark/light toggle, theme selector, Settings page |
 | 0.1.5   | 2026-06-26 | Phase 0.5: TipTap editor, toolbar, split view, Katex math, Mermaid diagrams, auto-save |
 | 0.1.6   | 2026-06-26 | Phase 0.6: File tree sidebar, nested folders, drag-and-drop, note counts, inline CRUD |
+| 0.1.7   | 2026-06-26 | Phase 0.7: Notes REST API (CRUD), Zod schemas, 83 tests passing, curl verified |

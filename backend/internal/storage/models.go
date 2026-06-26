@@ -6,6 +6,7 @@ type Note struct {
 	Content   string   `db:"content"     json:"content"`
 	VaultID   *int64   `db:"vault_id"    json:"vaultId,omitempty"`
 	ParentID  *int64   `db:"parent_id"   json:"parentId,omitempty"`
+	IsFolder  bool     `db:"is_folder"   json:"isFolder"`
 	SortOrder int      `db:"sort_order"  json:"sortOrder"`
 	CreatedAt SQLTime  `db:"created_at"  json:"createdAt"`
 	UpdatedAt SQLTime  `db:"updated_at"  json:"updatedAt"`

@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS notes (
     content     TEXT    NOT NULL DEFAULT '',
     vault_id    INTEGER REFERENCES vaults(id) ON DELETE SET NULL,
     parent_id   INTEGER REFERENCES notes(id) ON DELETE SET NULL,
+    is_folder   INTEGER NOT NULL DEFAULT 0,
     sort_order  INTEGER NOT NULL DEFAULT 0,
     created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at  TEXT    NOT NULL DEFAULT (datetime('now')),
@@ -144,6 +145,8 @@ func Open(path string) (*Store, error) {
 		db.Close()
 		return nil, fmt.Errorf("storage: migrate: %w", err)
 	}
+
+	db.Exec(`ALTER TABLE notes ADD COLUMN is_folder INTEGER NOT NULL DEFAULT 0`)
 
 	return &Store{DB: db}, nil
 }
