@@ -256,6 +256,12 @@ pnpm test           # Vitest (frontend)
 
 ---
 
+## Versioning
+
+Agent-managed. After each commit, the agent appends a row to the changelog (here and in README.md)
+and creates an annotated git tag. Patch (0.1.x) and minor (0.x.0) bumps are automated.
+Major version bumps (x.0.0) are user-controlled — only do them when explicitly asked.
+
 ## Changelog
 
 | Version | Date       | Changes                                                          |

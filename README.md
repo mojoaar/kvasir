@@ -72,6 +72,12 @@ make check   # Lint + test
 
 Toggle dark/light per theme via the header switcher or `Cmd+Shift+T`.
 
+## Changelog
+
+| Version | Date       | Changes                                                          |
+| ------- | ---------- | ---------------------------------------------------------------- |
+| 0.1.0   | 2026-06-26 | Initial project scaffold: agents.md, plan.md, README.md, LICENSE |
+
 ## License
 
 [AGPL-3.0](LICENSE)

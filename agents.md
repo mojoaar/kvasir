@@ -190,6 +190,8 @@ Theme and mode stored in `localStorage` keys `kvasir-theme` and `kvasir-mode` (d
 - Write tests for new features
 - Maintain ≥ 80% line coverage for both frontend (vitest) and backend (go test -cover)
 - Use `//go:embed` for embedding frontend — never copy files manually
+- After each commit: update changelog in README.md, create git tag, push with `--follow-tags`
+- Only bump major version when explicitly asked — patch/minor bumps are agent-automated
 
 ### Never
 - Commit secrets, credentials, or `.env` files
@@ -263,11 +265,13 @@ go test -coverprofile=coverage.out ./... # Go tests (with coverage)
 make check             # Runs lint + test + coverage checks
 ```
 
-## Release Workflow
+## Versioning & Release Workflow
 
-- **Normal push** — standard `git add`, `git commit`, `git push origin main`
-- **Tagged release** — version bumps and git tags only when explicitly requested
-- Never create tags or GitHub releases autonomously
+- **Agent-managed** — after each commit, the agent appends a row to the changelog in README.md and creates an annotated git tag for the new version
+- **Agent handles** patch (`0.1.x`) and minor (`0.x.0`) bumps autonomously based on commit content
+- **User-only** major version bumps (`x.0.0`) — the user must explicitly request these
+- **Commit flow:** `git add` → `git commit` → append changelog entry to README.md → `git tag -a vX.Y.Z -m "..."` → `git push --follow-tags`
+- Never create GitHub Releases — use git tags only
 
 ## Gotchas
 
