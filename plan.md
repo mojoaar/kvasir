@@ -89,11 +89,11 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: CRUD works via curl, OpenAPI docs reflect endpoints
 
 ### 0.8 — Full-Text Search [1-2 days]
-- [ ] `GET /api/v1/search?q=query` — FTS5 search endpoint
-- [ ] Search input in sidebar header
-- [ ] Results panel with highlighted matches
-- [ ] Search by tag: `GET /api/v1/search/tags?q=`
-- [ ] Verify: search returns results < 100ms with 10k notes
+- [x] `GET /api/v1/search?q=query` — FTS5 search endpoint
+- [x] Search input in sidebar header
+- [x] Results panel with highlighted matches
+- [x] Search by tag: `GET /api/v1/search/tags?q=`
+- [x] Verify: search returns results < 100ms with 10k notes
 
 ### 0.9 — Tags API + UI [1-2 days]
 - [ ] `GET/POST /api/v1/tags` — list/create tags
@@ -274,3 +274,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.5   | 2026-06-26 | Phase 0.5: TipTap editor, toolbar, split view, Katex math, Mermaid diagrams, auto-save |
 | 0.1.6   | 2026-06-26 | Phase 0.6: File tree sidebar, nested folders, drag-and-drop, note counts, inline CRUD |
 | 0.1.7   | 2026-06-26 | Phase 0.7: Notes REST API (CRUD), Zod schemas, 83 tests passing, curl verified |
+| 0.1.8   | 2026-06-26 | Phase 0.8: FTS5 search endpoint, tag search, sidebar search input, results with highlights |

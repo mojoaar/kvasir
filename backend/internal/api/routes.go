@@ -22,5 +22,8 @@ func RegisterRoutes(r *gin.Engine, store *storage.Store) {
 		v1.GET("/notes/:id", h.GetNote)
 		v1.PUT("/notes/:id", h.UpdateNote)
 		v1.DELETE("/notes/:id", h.DeleteNote)
+
+		v1.GET("/search", h.Search)
+		v1.GET("/search/tags", h.SearchByTag)
 	}
 }

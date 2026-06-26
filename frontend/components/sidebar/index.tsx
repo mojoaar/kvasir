@@ -1,7 +1,8 @@
 "use client"
 
+import { useState, type FormEvent } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useUIStore } from "@/lib/store/ui-store"
 import {
@@ -11,6 +12,7 @@ import {
   PanelLeft,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { ThemeToggle } from "@/components/themes/theme-toggle"
 import { ThemeSelector } from "@/components/themes/theme-selector"
@@ -31,7 +33,16 @@ const navItems = [
 
 export function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
   const { sidebarOpen, toggleSidebar } = useUIStore()
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
 
   if (!sidebarOpen) {
     return (
@@ -89,6 +100,20 @@ export function Sidebar() {
           )
         })}
       </nav>
+      <div className="px-2 py-2">
+        <form onSubmit={handleSearch}>
+          <div className="relative">
+            <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+            <Input
+              type="search"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-7 h-7 text-xs"
+            />
+          </div>
+        </form>
+      </div>
       <Separator />
       <div className="flex-1 min-h-0">
         <NoteTree />
