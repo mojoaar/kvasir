@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useUIStore } from "@/lib/store/ui-store"
 import {
-  FileText,
   Search,
   Settings,
   PanelLeftClose,
@@ -15,13 +14,9 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { ThemeToggle } from "@/components/themes/theme-toggle"
 import { ThemeSelector } from "@/components/themes/theme-selector"
+import { NoteTree } from "@/components/sidebar/note-tree"
 
 const navItems = [
-  {
-    href: "/notes",
-    label: "Notes",
-    icon: FileText,
-  },
   {
     href: "/search",
     label: "Search",
@@ -73,7 +68,7 @@ export function Sidebar() {
         </div>
       </div>
       <Separator />
-      <nav className="flex-1 px-2 py-2 space-y-1">
+      <nav className="px-2 py-1.5 space-y-0.5">
         {navItems.map((item) => {
           const isActive =
             pathname === item.href || pathname.startsWith(`${item.href}/`)
@@ -82,18 +77,22 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
+                "flex items-center gap-2 rounded-md px-3 py-1 text-xs font-medium transition-colors",
                 isActive
                   ? "bg-accent text-accent-foreground"
                   : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
               )}
             >
-              <item.icon className="h-4 w-4" />
+              <item.icon className="h-3.5 w-3.5" />
               {item.label}
             </Link>
           )
         })}
       </nav>
+      <Separator />
+      <div className="flex-1 min-h-0">
+        <NoteTree />
+      </div>
     </aside>
   )
 }

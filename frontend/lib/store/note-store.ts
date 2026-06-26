@@ -6,6 +6,7 @@ export interface Note {
   content: string
   vaultId?: number | null
   parentId?: number | null
+  isFolder: boolean
   sortOrder: number
   createdAt: string
   updatedAt: string
@@ -22,6 +23,7 @@ interface NotesState {
   addNote: (note: Note) => void
   updateNote: (id: number, updates: Partial<Note>) => void
   removeNote: (id: number) => void
+  moveNote: (id: number, parentId: number | null, sortOrder: number) => void
 }
 
 export const useNotesStore = create<NotesState>()((set) => ({
@@ -40,5 +42,11 @@ export const useNotesStore = create<NotesState>()((set) => ({
     set((state) => ({
       notes: state.notes.filter((n) => n.id !== id),
       activeNoteId: state.activeNoteId === id ? null : state.activeNoteId,
+    })),
+  moveNote: (id, parentId, sortOrder) =>
+    set((state) => ({
+      notes: state.notes.map((n) =>
+        n.id === id ? { ...n, parentId, sortOrder, updatedAt: new Date().toISOString() } : n
+      ),
     })),
 }))

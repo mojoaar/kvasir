@@ -72,12 +72,12 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: type markdown, tables render, math renders, mermaid diagrams render
 
 ### 0.6 — Sidebar with File Tree [2-3 days]
-- [ ] Note list: create, rename, delete notes from sidebar
-- [ ] Folder tree: nested folder structure
-- [ ] Drag-and-drop to reorganize
-- [ ] Note count per folder
-- [ ] Collapsible sections
-- [ ] Verify: CRUD notes from sidebar, drag to reorganize
+- [x] Note list: create, rename, delete notes from sidebar
+- [x] Folder tree: nested folder structure
+- [x] Drag-and-drop to reorganize
+- [x] Note count per folder
+- [x] Collapsible sections
+- [x] Verify: CRUD notes from sidebar, drag to reorganize
 
 ### 0.7 — Notes API [2-3 days]
 - [ ] `GET /api/v1/notes` — list notes (pagination, vault filter)
@@ -272,3 +272,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.3   | 2026-06-26 | Phase 0.3: shadcn/ui, TanStack React Query, Zustand stores, Providers, Sidebar component |
 | 0.1.4   | 2026-06-26 | Phase 0.4: 5-theme system (CSS variables), dark/light toggle, theme selector, Settings page |
 | 0.1.5   | 2026-06-26 | Phase 0.5: TipTap editor, toolbar, split view, Katex math, Mermaid diagrams, auto-save |
+| 0.1.6   | 2026-06-26 | Phase 0.6: File tree sidebar, nested folders, drag-and-drop, note counts, inline CRUD |
