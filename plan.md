@@ -118,12 +118,12 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: all endpoints documented, Swagger UI functional
 
 ### 0.12 — CLI [2-3 days]
-- [ ] `kvasir list` — list notes
-- [ ] `kvasir search <query>` — full-text search
-- [ ] `kvasir export <id>` — export note as markdown
-- [ ] `kvasir create <title>` — create note from CLI
-- [ ] Cobra subcommands with flags
-- [ ] Verify: CLI works against running backend
+- [x] `kvasir list` — list notes
+- [x] `kvasir search <query>` — full-text search
+- [x] `kvasir export <id>` — export note as markdown
+- [x] `kvasir create <title>` — create note from CLI
+- [x] Cobra subcommands with flags
+- [x] Verify: CLI works against running backend
 
 ### 0.13 — Single Binary Build [1-2 days]
 - [ ] `make build` pipeline: frontend build → copy to `backend/internal/embed/dist/` → `go build`
@@ -279,3 +279,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.9   | 2026-06-26 | Phase 0.9: Tags API + UI, tag chips, color palette, note tagging |
 | 0.1.10  | 2026-06-26 | Phase 0.10: Command palette (cmdk), Cmd+K shortcut, navigation/search/theme commands |
 | 0.1.11  | 2026-06-26 | Phase 0.11: Swaggo annotations, Swagger UI, OpenAPI spec, all 17 endpoints documented |
+| 0.1.12  | 2026-06-26 | Phase 0.12: CLI — list, search, export, create commands with --server flag |
