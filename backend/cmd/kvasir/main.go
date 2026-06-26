@@ -1,3 +1,9 @@
+// @title           Kvasir API
+// @version         0.1.0
+// @description     Beautiful, techy, Nordic-inspired markdown knowledge base. Sync-first, API-first, plugin-extensible.
+// @host            localhost:8080
+// @BasePath        /api/v1
+
 package main
 
 import (

@@ -112,10 +112,10 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: Cmd+K opens palette, type to search, Enter to execute
 
 ### 0.11 — REST API Documentation [1-2 days]
-- [ ] Swaggo annotations on all Go handlers
-- [ ] `GET /api/v1/docs` — Swagger UI page
-- [ ] OpenAPI JSON at `/api/v1/swagger.json`
-- [ ] Verify: all endpoints documented, Swagger UI functional
+- [x] Swaggo annotations on all Go handlers
+- [x] `GET /api/v1/docs` — Swagger UI page
+- [x] OpenAPI JSON at `/api/v1/swagger.json`
+- [x] Verify: all endpoints documented, Swagger UI functional
 
 ### 0.12 — CLI [2-3 days]
 - [ ] `kvasir list` — list notes
@@ -278,3 +278,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.8   | 2026-06-26 | Phase 0.8: Full-text search endpoint, tag search, sidebar input, results page |
 | 0.1.9   | 2026-06-26 | Phase 0.9: Tags API + UI, tag chips, color palette, note tagging |
 | 0.1.10  | 2026-06-26 | Phase 0.10: Command palette (cmdk), Cmd+K shortcut, navigation/search/theme commands |
+| 0.1.11  | 2026-06-26 | Phase 0.11: Swaggo annotations, Swagger UI, OpenAPI spec, all 17 endpoints documented |

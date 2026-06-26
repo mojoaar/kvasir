@@ -1,0 +1,644 @@
+basePath: /api/v1
+definitions:
+  internal_api_handlers.addTagRequest:
+    properties:
+      tagId:
+        type: integer
+    required:
+    - tagId
+    type: object
+  internal_api_handlers.createNoteRequest:
+    properties:
+      content:
+        type: string
+      isFolder:
+        type: boolean
+      parentId:
+        type: integer
+      sortOrder:
+        type: integer
+      title:
+        type: string
+      vaultId:
+        type: integer
+    required:
+    - title
+    type: object
+  internal_api_handlers.createTagRequest:
+    properties:
+      color:
+        type: string
+      name:
+        type: string
+    required:
+    - color
+    - name
+    type: object
+  internal_api_handlers.updateNoteRequest:
+    properties:
+      content:
+        type: string
+      isFolder:
+        type: boolean
+      parentId:
+        type: integer
+      sortOrder:
+        type: integer
+      title:
+        type: string
+      vaultId:
+        type: integer
+    required:
+    - title
+    type: object
+  internal_api_handlers.updateTagRequest:
+    properties:
+      color:
+        type: string
+      name:
+        type: string
+    required:
+    - color
+    - name
+    type: object
+  kvasir_internal_storage.Note:
+    properties:
+      content:
+        type: string
+      createdAt:
+        $ref: '#/definitions/kvasir_internal_storage.SQLTime'
+      deletedAt:
+        $ref: '#/definitions/kvasir_internal_storage.SQLTime'
+      id:
+        type: integer
+      isFolder:
+        type: boolean
+      parentId:
+        type: integer
+      sortOrder:
+        type: integer
+      title:
+        type: string
+      updatedAt:
+        $ref: '#/definitions/kvasir_internal_storage.SQLTime'
+      vaultId:
+        type: integer
+    type: object
+  kvasir_internal_storage.SQLTime:
+    properties:
+      time.Time:
+        type: string
+    type: object
+  kvasir_internal_storage.Tag:
+    properties:
+      color:
+        type: string
+      createdAt:
+        $ref: '#/definitions/kvasir_internal_storage.SQLTime'
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: Beautiful, techy, Nordic-inspired markdown knowledge base. Sync-first,
+    API-first, plugin-extensible.
+  title: Kvasir API
+  version: 0.1.0
+paths:
+  /health:
+    get:
+      description: Returns the service status and version
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Health check
+      tags:
+      - health
+  /notes:
+    get:
+      description: Returns a paginated list of notes, optionally filtered by vault
+        or parent. Folders are listed first.
+      parameters:
+      - description: Pagination offset
+        in: query
+        name: offset
+        type: integer
+      - description: Page size (default 50)
+        in: query
+        name: limit
+        type: integer
+      - description: Filter by vault ID
+        in: query
+        name: vault_id
+        type: integer
+      - description: Filter by parent folder ID
+        in: query
+        name: parent_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/kvasir_internal_storage.Note'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List notes
+      tags:
+      - notes
+    post:
+      consumes:
+      - application/json
+      description: Creates a new note or folder
+      parameters:
+      - description: Note data
+        in: body
+        name: note
+        required: true
+        schema:
+          $ref: '#/definitions/internal_api_handlers.createNoteRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/kvasir_internal_storage.Note'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a note
+      tags:
+      - notes
+  /notes/{id}:
+    delete:
+      description: Soft-deletes a note by ID
+      parameters:
+      - description: Note ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a note
+      tags:
+      - notes
+    get:
+      description: Returns a single note by ID
+      parameters:
+      - description: Note ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kvasir_internal_storage.Note'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a note
+      tags:
+      - notes
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing note by ID
+      parameters:
+      - description: Note ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated note data
+        in: body
+        name: note
+        required: true
+        schema:
+          $ref: '#/definitions/internal_api_handlers.updateNoteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kvasir_internal_storage.Note'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a note
+      tags:
+      - notes
+  /notes/{id}/tags:
+    delete:
+      consumes:
+      - application/json
+      description: Removes a tag from a note
+      parameters:
+      - description: Note ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Tag ID to remove
+        in: body
+        name: tag
+        required: true
+        schema:
+          $ref: '#/definitions/internal_api_handlers.addTagRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Remove tag from note
+      tags:
+      - tags
+    get:
+      description: Returns all tags assigned to a note, ordered by name
+      parameters:
+      - description: Note ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/kvasir_internal_storage.Tag'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get note tags
+      tags:
+      - tags
+    post:
+      consumes:
+      - application/json
+      description: Adds a tag to a note (idempotent — no error if already tagged)
+      parameters:
+      - description: Note ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Tag ID to add
+        in: body
+        name: tag
+        required: true
+        schema:
+          $ref: '#/definitions/internal_api_handlers.addTagRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Add tag to note
+      tags:
+      - tags
+  /search:
+    get:
+      description: Searches notes by title and content using FTS5. Returns ranked
+        results with snippets.
+      parameters:
+      - description: Search query
+        in: query
+        name: q
+        required: true
+        type: string
+      - description: Max results (default 20)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Full-text search
+      tags:
+      - search
+  /search/tags:
+    get:
+      description: Finds notes that have tags matching the query
+      parameters:
+      - description: Tag name search query
+        in: query
+        name: q
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Search by tag
+      tags:
+      - search
+  /tags:
+    get:
+      description: Returns all tags ordered by name
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/kvasir_internal_storage.Tag'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: List tags
+      tags:
+      - tags
+    post:
+      consumes:
+      - application/json
+      description: Creates a new tag with name and color
+      parameters:
+      - description: Tag data
+        in: body
+        name: tag
+        required: true
+        schema:
+          $ref: '#/definitions/internal_api_handlers.createTagRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/kvasir_internal_storage.Tag'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a tag
+      tags:
+      - tags
+  /tags/{id}:
+    delete:
+      description: Deletes a tag and removes it from all notes
+      parameters:
+      - description: Tag ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a tag
+      tags:
+      - tags
+    get:
+      description: Returns a single tag by ID
+      parameters:
+      - description: Tag ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kvasir_internal_storage.Tag'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a tag
+      tags:
+      - tags
+    put:
+      consumes:
+      - application/json
+      description: Updates an existing tag's name and color by ID
+      parameters:
+      - description: Tag ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated tag data
+        in: body
+        name: tag
+        required: true
+        schema:
+          $ref: '#/definitions/internal_api_handlers.updateTagRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kvasir_internal_storage.Tag'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update a tag
+      tags:
+      - tags
+swagger: "2.0"

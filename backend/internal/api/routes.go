@@ -1,7 +1,12 @@
 package api
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"kvasir/docs"
 	"kvasir/internal/api/handlers"
 	"kvasir/internal/api/middleware"
 	"kvasir/internal/storage"
@@ -12,6 +17,14 @@ func RegisterRoutes(r *gin.Engine, store *storage.Store) {
 	r.Use(middleware.Logger())
 
 	h := handlers.New(store)
+
+	r.GET("/api/v1/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler,
+		ginSwagger.URL("/api/v1/swagger.json"),
+	))
+
+	r.GET("/api/v1/swagger.json", func(c *gin.Context) {
+		c.Data(http.StatusOK, "application/json; charset=utf-8", docs.SwaggerJSON)
+	})
 
 	v1 := r.Group("/api/v1")
 	{

@@ -26,6 +26,19 @@ type updateNoteRequest struct {
 	SortOrder int    `json:"sortOrder"`
 }
 
+// ListNotes godoc
+// @Summary      List notes
+// @Description  Returns a paginated list of notes, optionally filtered by vault or parent. Folders are listed first.
+// @Tags         notes
+// @Produce      json
+// @Param        offset     query     int   false  "Pagination offset"
+// @Param        limit      query     int   false  "Page size (default 50)"
+// @Param        vault_id   query     int   false  "Filter by vault ID"
+// @Param        parent_id  query     int   false  "Filter by parent folder ID"
+// @Success      200  {array}   storage.Note
+// @Failure      400  {object}  map[string]string
+// @Failure      500  {object}  map[string]string
+// @Router       /notes [get]
 func (h *Handler) ListNotes(c *gin.Context) {
 	offset, _ := strconv.Atoi(c.DefaultQuery("offset", "0"))
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "50"))
@@ -60,6 +73,17 @@ func (h *Handler) ListNotes(c *gin.Context) {
 	c.JSON(http.StatusOK, notes)
 }
 
+// CreateNote godoc
+// @Summary      Create a note
+// @Description  Creates a new note or folder
+// @Tags         notes
+// @Accept       json
+// @Produce      json
+// @Param        note  body  createNoteRequest  true  "Note data"
+// @Success      201   {object}  storage.Note
+// @Failure      400   {object}  map[string]string
+// @Failure      500   {object}  map[string]string
+// @Router       /notes [post]
 func (h *Handler) CreateNote(c *gin.Context) {
 	var req createNoteRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -84,6 +108,16 @@ func (h *Handler) CreateNote(c *gin.Context) {
 	c.JSON(http.StatusCreated, note)
 }
 
+// GetNote godoc
+// @Summary      Get a note
+// @Description  Returns a single note by ID
+// @Tags         notes
+// @Produce      json
+// @Param        id   path  int  true  "Note ID"
+// @Success      200  {object}  storage.Note
+// @Failure      400  {object}  map[string]string
+// @Failure      404  {object}  map[string]string
+// @Router       /notes/{id} [get]
 func (h *Handler) GetNote(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
@@ -100,6 +134,18 @@ func (h *Handler) GetNote(c *gin.Context) {
 	c.JSON(http.StatusOK, note)
 }
 
+// UpdateNote godoc
+// @Summary      Update a note
+// @Description  Updates an existing note by ID
+// @Tags         notes
+// @Accept       json
+// @Produce      json
+// @Param        id    path  int                true  "Note ID"
+// @Param        note  body  updateNoteRequest  true  "Updated note data"
+// @Success      200   {object}  storage.Note
+// @Failure      400   {object}  map[string]string
+// @Failure      500   {object}  map[string]string
+// @Router       /notes/{id} [put]
 func (h *Handler) UpdateNote(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
@@ -131,6 +177,16 @@ func (h *Handler) UpdateNote(c *gin.Context) {
 	c.JSON(http.StatusOK, note)
 }
 
+// DeleteNote godoc
+// @Summary      Delete a note
+// @Description  Soft-deletes a note by ID
+// @Tags         notes
+// @Produce      json
+// @Param        id   path  int  true  "Note ID"
+// @Success      200  {object}  map[string]string
+// @Failure      400  {object}  map[string]string
+// @Failure      500  {object}  map[string]string
+// @Router       /notes/{id} [delete]
 func (h *Handler) DeleteNote(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 64)
 	if err != nil {
