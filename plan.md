@@ -267,3 +267,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | Version | Date       | Changes                                                          |
 | ------- | ---------- | ---------------------------------------------------------------- |
 | 0.1.0   | 2026-06-26 | Initial project scaffold: agents.md, plan.md, README.md, LICENSE |
+| 0.1.1   | 2026-06-26 | Phase 0.1: Makefile, backend (Gin), frontend (Next.js 16), CLI (Cobra), configs |

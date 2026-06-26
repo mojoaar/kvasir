@@ -1,1 +1,48 @@
+# Spec (local only, not in repo)
 kvasir.md
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+
+# Build output
+dist/
+frontend/out/
+
+# Go
+/kvasir
+/kvasir-*
+*.exe
+*.test
+*.out
+backend/coverage.out
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+*.coverprofile
+
+# Logs
+*.log
+
+# Temp
+tmp/
