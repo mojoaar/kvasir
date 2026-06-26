@@ -64,12 +64,12 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: all 5 themes render correctly, toggle works, mode persists on reload
 
 ### 0.5 — Markdown Editor (TipTap) [3-4 days]
-- [ ] TipTap editor setup with extensions: starter-kit, table, footnote, math (Katex), code-block, mermaid
-- [ ] Editor component with toolbar (bold, italic, headings, lists, tables, code, math, mermaid)
-- [ ] Split view: editor + live preview
-- [ ] Auto-save (debounced, 2s) + manual save (Cmd+S)
-- [ ] Keyboard shortcuts within editor
-- [ ] Verify: type markdown, tables render, math renders, mermaid diagrams render
+- [x] TipTap editor setup with extensions: starter-kit, table, footnote, math (Katex), code-block, mermaid
+- [x] Editor component with toolbar (bold, italic, headings, lists, tables, code, math, mermaid)
+- [x] Split view: editor + live preview
+- [x] Auto-save (debounced, 2s) + manual save (Cmd+S)
+- [x] Keyboard shortcuts within editor
+- [x] Verify: type markdown, tables render, math renders, mermaid diagrams render
 
 ### 0.6 — Sidebar with File Tree [2-3 days]
 - [ ] Note list: create, rename, delete notes from sidebar
@@ -271,3 +271,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.2   | 2026-06-26 | Phase 0.2: SQLite schema, storage layer (87.5% coverage), FTS5 search, health endpoint, SQLTime type |
 | 0.1.3   | 2026-06-26 | Phase 0.3: shadcn/ui, TanStack React Query, Zustand stores, Providers, Sidebar component |
 | 0.1.4   | 2026-06-26 | Phase 0.4: 5-theme system (CSS variables), dark/light toggle, theme selector, Settings page |
+| 0.1.5   | 2026-06-26 | Phase 0.5: TipTap editor, toolbar, split view, Katex math, Mermaid diagrams, auto-save |

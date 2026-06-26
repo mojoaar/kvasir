@@ -81,6 +81,8 @@ Toggle dark/light per theme via the header switcher or `Cmd+Shift+T`.
 | 0.1.2   | 2026-06-26 | Phase 0.2: SQLite schema, storage layer (87.5% coverage), FTS5 search, health endpoint, SQLTime type |
 | 0.1.3   | 2026-06-26 | Phase 0.3: shadcn/ui, TanStack React Query, Zustand stores, Providers, Sidebar component |
 | 0.1.4   | 2026-06-26 | Phase 0.4: 5-theme system (CSS variables), dark/light toggle, theme selector, Settings page |
+| 0.1.5   | 2026-06-26 | Phase 0.5: TipTap editor, toolbar, split view, Katex math, Mermaid diagrams, auto-save |
+| 0.1.4   | 2026-06-26 | Phase 0.4: 5-theme system (CSS variables), dark/light toggle, theme selector, Settings page |
 
 ## License
 
