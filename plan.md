@@ -54,14 +54,14 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: frontend renders, proxies API calls to backend
 
 ### 0.4 — Theme System [2-3 days]
-- [ ] CSS custom properties for all 5 themes (dark + light variants each) in Tailwind config
-- [ ] Theme definitions: `frontend/lib/themes/kvasir.ts`, `dracula.ts`, `nord.ts`, `github.ts`, `cyberpunk.ts` — each exports `dark` and `light` palette objects
-- [ ] Theme provider component: reads/writes `localStorage` keys `kvasir-theme` and `kvasir-mode`
-- [ ] Inline script to apply theme + mode before first paint (prevents FOUC)
-- [ ] Dark/Light mode toggle (per‑theme, persists via `kvasir-mode` localStorage key)
-- [ ] Theme selector in Settings
-- [ ] JSON theme exports in `themes/*.json` (each with dark + light variants)
-- [ ] Verify: all 5 themes render correctly, toggle works, mode persists on reload
+- [x] CSS custom properties for all 5 themes (dark + light variants each) in Tailwind config
+- [x] Theme definitions: `frontend/lib/themes/kvasir.ts`, `dracula.ts`, `nord.ts`, `github.ts`, `cyberpunk.ts` — each exports `dark` and `light` palette objects
+- [x] Theme provider component: reads/writes `localStorage` keys `kvasir-theme` and `kvasir-mode`
+- [x] Inline script to apply theme + mode before first paint (prevents FOUC)
+- [x] Dark/Light mode toggle (per‑theme, persists via `kvasir-mode` localStorage key)
+- [x] Theme selector in Settings
+- [x] JSON theme exports in `themes/*.json` (each with dark + light variants)
+- [x] Verify: all 5 themes render correctly, toggle works, mode persists on reload
 
 ### 0.5 — Markdown Editor (TipTap) [3-4 days]
 - [ ] TipTap editor setup with extensions: starter-kit, table, footnote, math (Katex), code-block, mermaid
@@ -270,3 +270,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.1   | 2026-06-26 | Phase 0.1: Makefile, backend (Gin), frontend (Next.js 16), CLI (Cobra), configs |
 | 0.1.2   | 2026-06-26 | Phase 0.2: SQLite schema, storage layer (87.5% coverage), FTS5 search, health endpoint, SQLTime type |
 | 0.1.3   | 2026-06-26 | Phase 0.3: shadcn/ui, TanStack React Query, Zustand stores, Providers, Sidebar component |
+| 0.1.4   | 2026-06-26 | Phase 0.4: 5-theme system (CSS variables), dark/light toggle, theme selector, Settings page |
