@@ -43,6 +43,10 @@ func main() {
 	}
 	defer store.Close()
 
+	if err := store.SeedIfEmpty(); err != nil {
+		log.Printf("welcome note seed failed (non-fatal): %v", err)
+	}
+
 	r := gin.Default()
 	api.RegisterRoutes(r, store)
 

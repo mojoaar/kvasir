@@ -133,9 +133,9 @@ REST API, CLI, and single-binary distribution.
 - [x] Verify: single binary serves frontend + API on `:8080`
 
 ### 0.14 — Welcome Note + Tutorial [1 day]
-- [ ] First-run: create welcome note with tutorial content
-- [ ] Welcome note covers: editor basics, themes, search, keyboard shortcuts
-- [ ] Verify: fresh install shows welcome note
+- [x] First-run: create welcome note with tutorial content
+- [x] Welcome note covers: editor basics, themes, search, keyboard shortcuts
+- [x] Verify: fresh install shows welcome note
 
 ### 0.15 — Testing + Coverage + Polish [3-4 days]
 - [ ] Frontend: vitest tests for theme system, API client, stores, command palette
@@ -281,3 +281,4 @@ Major version bumps (x.0.0) are user-controlled — only do them when explicitly
 | 0.1.11  | 2026-06-26 | Phase 0.11: Swaggo annotations, Swagger UI, OpenAPI spec, all 17 endpoints documented |
 | 0.1.12  | 2026-06-26 | Phase 0.12: CLI — list, search, export, create commands with --server flag |
 | 0.1.13  | 2026-06-26 | Phase 0.13: Single binary build, //go:embed frontend, 35MB ARM64 binary |
+| 0.1.14  | 2026-06-26 | Phase 0.14: Welcome note + tutorial, first-run seed (editor, themes, search, shortcuts) |

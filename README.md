@@ -90,6 +90,7 @@ Toggle dark/light per theme via the header switcher or `Cmd+Shift+T`.
 | 0.1.11  | 2026-06-26 | Phase 0.11: Swaggo annotations, Swagger UI, OpenAPI spec |
 | 0.1.12  | 2026-06-26 | Phase 0.12: CLI — list, search, export, create commands |
 | 0.1.13  | 2026-06-26 | Phase 0.13: Single binary build, //go:embed frontend, 35MB binary |
+| 0.1.14  | 2026-06-26 | Phase 0.14: Welcome note + tutorial, first-run seed |
 
 ## License
 
